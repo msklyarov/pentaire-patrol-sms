@@ -1,0 +1,24 @@
+{
+  "name": "pentaire-patrol-sms",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start-server": "node ./src/server.js",
+    "start": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "server": "nodemon --inspect ./src/server.js",
+    "prettier": "prettier --write \"{src/**/*.{js,jsx,css},client/src/**/*.{js,jsx,css}}\"",
+    "update": "npm i && cd client && npm i"
+  },
+  "author": "Maxim Sklyarov",
+  "license": "MIT",
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "nodemon": "1.11.0",
+    "prettier": "^1.16.4",
+    "ringcentral": "https://github.com/msklyarov/ringcentral-js.git"
+  }
+}
