@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const auth = require('basic-auth');
 const path = require('path');
+const crypto = require('crypto');
 
 const config = require('../config');
 const sendSms = require('./sendSms');
@@ -43,11 +44,10 @@ app.use((req, res, next) => {
   return next();
 });
 
-let completed = []; // to phone number array
-let stopSms = false;
+const tasks = {};
 
-const addNumber = number => completed.push(number);
-const isStopped = () => stopSms;
+const addNumber = taskId => number => tasks[taskId].completed.push(number);
+const isStopped = taskId => () => tasks[taskId].stopSms;
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -58,8 +58,6 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/sendSms', (req, res) => {
-  completed = [];
-  stopSms = false;
   const {
     proxy,
     auth,
@@ -73,6 +71,13 @@ router.post('/sendSms', (req, res) => {
     texts,
   } = req.body;
 
+  const taskId = crypto.randomBytes(20).toString('hex');
+  tasks[taskId] = {
+    completed: [], // to phone number array
+    stopSms: false,
+    toLength: smsTo.length,
+  };
+
   sendSms(
     proxy,
     auth,
@@ -84,19 +89,28 @@ router.post('/sendSms', (req, res) => {
     smsFrom,
     smsTo,
     texts,
-    addNumber,
-    isStopped,
+    addNumber(taskId),
+    isStopped(taskId),
   );
 
-  res.send({ status: 'Ok' });
+  res.json({ taskId });
 });
 
-router.post('/stopSms', () => {
-  stopSms = true;
+router.post('/stopSms', (req, res) => {
+  const { taskId } = req.body;
+
+  tasks[taskId].stopSms = true;
+  tasks[taskId].completed = [];
+  res.json({ status: 'Ok' });
 });
 
 router.post('/getStatus', (req, res) => {
-  res.json(completed);
+  const { taskId } = req.body;
+
+  if (tasks[taskId].toLength === tasks[taskId].completed.length) {
+    tasks[taskId].completed.push('FINISH');
+  }
+  res.json(tasks[taskId].completed);
 });
 
 app.use(config.server.routePrefix, router);

@@ -2,11 +2,10 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-export default ({ status, stopSms, onStop }) => {
-
-  const onStopSms = event => {
+export default ({ status, onStopSms, onStop }) => {
+  const onStopHandler = event => {
     event.preventDefault();
-    stopSms();
+    onStopSms();
     onStop();
   };
 
@@ -27,10 +26,10 @@ export default ({ status, stopSms, onStop }) => {
         style={{ marginTop: '2em' }}
         variant="contained"
         color="secondary"
-        onClick={onStopSms}
+        onClick={onStopHandler}
       >
         Stop
       </Button>
     </React.Fragment>
-  )
+  );
 };

@@ -11,9 +11,15 @@ import StatusComponent from './components/';
 
 class StatusContainer extends React.Component {
   componentDidMount() {
-    this.props.fetchStatus();
+    if (this.props.sms.taskId) {
+      this.props.fetchStatus(this.props.sms.taskId);
+    }
     this.setState({
-      timerId: setInterval(() => this.props.fetchStatus(), 5000),
+      timerId: setInterval(() => {
+        if (this.props.sms.taskId) {
+          this.props.fetchStatus(this.props.sms.taskId);
+        }
+      }, 5000),
     });
   }
 
@@ -22,12 +28,20 @@ class StatusContainer extends React.Component {
     this.props.clearStatus();
   }
 
+  onStopSms = () => this.props.stopSms(this.state.timerId);
+
   render() {
-    return <StatusComponent {...pick(['status', 'stopSms', 'onStop'], this.props)} />;
+    return (
+      <StatusComponent
+        onStopSms={this.onStopSms}
+        {...pick(['status', 'onStop'], this.props)}
+      />
+    );
   }
 }
 
 const select = (state, props) => ({
+  sms: state.sms,
   status: state.status,
 });
 
