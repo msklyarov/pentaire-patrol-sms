@@ -13,8 +13,8 @@ class StatusContainer extends React.Component {
   componentDidMount() {
     this.props.fetchStatus();
     this.setState({
-      timerId: setInterval(() => this.props.fetchStatus(), 5000)
-    })
+      timerId: setInterval(() => this.props.fetchStatus(), 5000),
+    });
   }
 
   componentWillUnmount() {

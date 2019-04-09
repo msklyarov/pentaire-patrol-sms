@@ -33,6 +33,7 @@ class LoginComponent extends React.Component {
           margin="normal"
         />
         <Button
+          style={{ marginTop: '2em' }}
           variant="contained"
           color="secondary"
           onClick={this.onLogon}

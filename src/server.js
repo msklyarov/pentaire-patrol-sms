@@ -15,21 +15,26 @@ app.use(bodyParser.json());
 
 const loginAttempts = {
   count: 0,
-  skipUntil: new Date()
+  skipUntil: new Date(),
 };
 
 app.use((req, res, next) => {
+  if (req.originalUrl === '/api/login') {
+    return next();
+  }
   const user = auth(req);
-
-  console.log('user', JSON.stringify(user, null, 2))
 
   // if (loginAttempts.count > config.login.attemptsCount) {
   //   loginAttempts.skipUntil = (new Date()).getTime() + config.login.timeoutInMs;
   //   loginAttempts.number = 0;
   // }
 
-  if (/*(new Date()).getTime() > loginAttempts.skipUntil.getTime() ||*/
-    !user || config.login.name !== user.name || config.login.password !== user.pass) {
+  if (
+    /*(new Date()).getTime() > loginAttempts.skipUntil.getTime() ||*/
+    !user ||
+    config.login.name !== user.name ||
+    config.login.password !== user.pass
+  ) {
     loginAttempts.number++;
     res.set('WWW-Authenticate', 'Basic realm="example"');
     return res.status(401).send();
@@ -44,7 +49,13 @@ let stopSms = false;
 const addNumber = number => completed.push(number);
 const isStopped = () => stopSms;
 
-router.post('/login', (req, res) => res.send({ status: 'Ok' }));
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  res.send({
+    loggedIn:
+      config.login.name === username && config.login.password === password,
+  });
+});
 
 router.post('/sendSms', (req, res) => {
   completed = [];
@@ -80,11 +91,11 @@ router.post('/sendSms', (req, res) => {
   res.send({ status: 'Ok' });
 });
 
-router.get('/stopSms', () => {
+router.post('/stopSms', () => {
   stopSms = true;
 });
 
-router.get('/getStatus', (req, res) => {
+router.post('/getStatus', (req, res) => {
   res.json(completed);
 });
 

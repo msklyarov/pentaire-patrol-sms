@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const FormRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -12,14 +18,14 @@ class SmsFormComponent extends React.Component {
   state = {
     smsFrom: '',
     smsTo: '',
-    texts: ''
+    texts: '',
   };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
-  sendSms = event  => {
+  sendSms = event => {
     event.preventDefault();
     const data = {
       ...this.state,
@@ -33,7 +39,7 @@ class SmsFormComponent extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Form onSubmit={this.sendSms}>
         <FormRow>
           <TextField
             error
@@ -54,6 +60,7 @@ class SmsFormComponent extends React.Component {
         </FormRow>
         <FormRow>
           <TextField
+            required
             error
             id="rcClientId"
             label="Client Id"
@@ -61,6 +68,7 @@ class SmsFormComponent extends React.Component {
             margin="normal"
           />
           <TextField
+            required
             error
             id="rcClientSecret"
             label="Client Secret"
@@ -70,6 +78,7 @@ class SmsFormComponent extends React.Component {
         </FormRow>
         <FormRow>
           <TextField
+            required
             error
             id="rcUsername"
             label="Username"
@@ -77,6 +86,7 @@ class SmsFormComponent extends React.Component {
             margin="normal"
           />
           <TextField
+            required
             error
             id="rcPassword"
             label="Password"
@@ -85,6 +95,7 @@ class SmsFormComponent extends React.Component {
           />
         </FormRow>
         <TextField
+          required
           error
           id="rcServerUrl"
           label="Server Url"
@@ -92,6 +103,7 @@ class SmsFormComponent extends React.Component {
           margin="normal"
         />
         <TextField
+          required
           error
           id="smsFrom"
           label="SMS From"
@@ -101,6 +113,7 @@ class SmsFormComponent extends React.Component {
           margin="normal"
         />
         <TextField
+          required
           error
           id="smsTo"
           label="SMS To"
@@ -110,6 +123,7 @@ class SmsFormComponent extends React.Component {
           margin="normal"
         />
         <TextField
+          required
           error
           id="texts"
           label="Texts"
@@ -119,14 +133,15 @@ class SmsFormComponent extends React.Component {
           margin="normal"
         />
         <Button
+          style={{ marginTop: '2em' }}
+          type="submit"
           variant="contained"
           color="secondary"
-          onClick={this.sendSms}
         >
           Start
         </Button>
-      </React.Fragment>
-    )
+      </Form>
+    );
   }
 }
 

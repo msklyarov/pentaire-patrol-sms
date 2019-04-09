@@ -14,6 +14,10 @@ const RootContainer = styled.div`
   justify-content: center;
 `;
 
+const LogoImg = styled.img`
+  margin: auto;
+`;
+
 class RootComponent extends React.Component {
   state = { screen: screenType.login };
 
@@ -27,23 +31,34 @@ class RootComponent extends React.Component {
     const Page = () => {
       switch (this.state.screen) {
         case screenType.login:
-          return <LoginContainer onLogin={() => this.handleScreenChange(screenType.smsForm)} />;
+          return (
+            <LoginContainer
+              onLogin={() => this.handleScreenChange(screenType.smsForm)}
+            />
+          );
 
         case screenType.smsForm:
-          return <SmsFormContainer onStart={() => this.handleScreenChange(screenType.status)} />;
+          return (
+            <SmsFormContainer
+              onStart={() => this.handleScreenChange(screenType.status)}
+            />
+          );
 
         case screenType.status:
-          return <StatusContainer  onStart={() => this.handleScreenChange(screenType.login)} />;
+          return (
+            <StatusContainer
+              onStart={() => this.handleScreenChange(screenType.login)}
+            />
+          );
 
         default:
           return null;
       }
     };
 
-
     return (
       <RootContainer>
-        <img src={logo} width={184} style={{ margin: 'auto' }} alt="Logo" />
+        <LogoImg src={logo} width={184} alt="Logo" />
         <Page />
       </RootContainer>
     );

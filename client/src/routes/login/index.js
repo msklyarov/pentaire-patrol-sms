@@ -1,21 +1,18 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { pick } from 'ramda';
 
 import logonAction from '../../modules/user/actions/logon';
 
 import LoginComponent from './components/';
 
 class LoginContainer extends React.Component {
-
   onLogon = (username, password) => {
-    this.props.logon(username, password)
-      .then(() => {
-        if (this.props.user.loggedIn) {
-          this.props.onLogin();
-        }
-      })
+    this.props.logon(username, password).then(() => {
+      if (this.props.user.loggedIn) {
+        this.props.onLogin();
+      }
+    });
   };
 
   render() {

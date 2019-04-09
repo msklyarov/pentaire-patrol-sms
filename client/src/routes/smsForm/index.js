@@ -13,8 +13,7 @@ class SmsFormContainer extends React.Component {
   }
 }
 
-const select = (state, props) => ({
-});
+const select = (state, props) => ({});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

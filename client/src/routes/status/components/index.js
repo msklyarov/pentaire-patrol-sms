@@ -15,7 +15,12 @@ export default ({ status, stopSms }) => (
         readOnly: true,
       }}
     />
-    <Button variant="contained" color="secondary" onClick={stopSms}>
+    <Button
+      style={{ marginTop: '2em' }}
+      variant="contained"
+      color="secondary"
+      onClick={stopSms}
+    >
       Stop
     </Button>
   </React.Fragment>
