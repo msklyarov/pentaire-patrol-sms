@@ -29,6 +29,7 @@ class LoginComponent extends React.Component {
         <TextField
           error
           label="Password"
+          type="password"
           onChange={this.handleChange('password')}
           margin="normal"
         />

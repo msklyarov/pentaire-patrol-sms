@@ -47,7 +47,7 @@ class RootComponent extends React.Component {
         case screenType.status:
           return (
             <StatusContainer
-              onStart={() => this.handleScreenChange(screenType.login)}
+              onStop={() => this.handleScreenChange(screenType.login)}
             />
           );
 

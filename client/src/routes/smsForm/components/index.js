@@ -25,7 +25,7 @@ class SmsFormComponent extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  sendSms = event => {
+  onSendSms = event => {
     event.preventDefault();
     const data = {
       ...this.state,
@@ -39,11 +39,10 @@ class SmsFormComponent extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.sendSms}>
+      <Form onSubmit={this.onSendSms}>
         <FormRow>
           <TextField
             error
-            id="proxy"
             label="Proxy"
             onChange={this.handleChange('proxy')}
             placeholder="PROXY:PORT"
@@ -51,7 +50,6 @@ class SmsFormComponent extends React.Component {
           />
           <TextField
             error
-            id="auth"
             label="Auth"
             onChange={this.handleChange('auth')}
             placeholder="AUTH:PASSWORD"
@@ -62,7 +60,6 @@ class SmsFormComponent extends React.Component {
           <TextField
             required
             error
-            id="rcClientId"
             label="Client Id"
             onChange={this.handleChange('rcClientId')}
             margin="normal"
@@ -70,7 +67,6 @@ class SmsFormComponent extends React.Component {
           <TextField
             required
             error
-            id="rcClientSecret"
             label="Client Secret"
             onChange={this.handleChange('rcClientSecret')}
             margin="normal"
@@ -80,7 +76,6 @@ class SmsFormComponent extends React.Component {
           <TextField
             required
             error
-            id="rcUsername"
             label="Username"
             onChange={this.handleChange('rcUsername')}
             margin="normal"
@@ -88,7 +83,6 @@ class SmsFormComponent extends React.Component {
           <TextField
             required
             error
-            id="rcPassword"
             label="Password"
             onChange={this.handleChange('rcPassword')}
             margin="normal"
@@ -97,7 +91,6 @@ class SmsFormComponent extends React.Component {
         <TextField
           required
           error
-          id="rcServerUrl"
           label="Server Url"
           onChange={this.handleChange('rcServerUrl')}
           margin="normal"
@@ -105,7 +98,6 @@ class SmsFormComponent extends React.Component {
         <TextField
           required
           error
-          id="smsFrom"
           label="SMS From"
           onChange={this.handleChange('smsFrom')}
           multiline
@@ -115,7 +107,6 @@ class SmsFormComponent extends React.Component {
         <TextField
           required
           error
-          id="smsTo"
           label="SMS To"
           onChange={this.handleChange('smsTo')}
           multiline
@@ -125,7 +116,6 @@ class SmsFormComponent extends React.Component {
         <TextField
           required
           error
-          id="texts"
           label="Texts"
           onChange={this.handleChange('texts')}
           multiline

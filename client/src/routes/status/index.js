@@ -23,7 +23,7 @@ class StatusContainer extends React.Component {
   }
 
   render() {
-    return <StatusComponent {...pick(['status', 'stopSms'], this.props)} />;
+    return <StatusComponent {...pick(['status', 'stopSms', 'onStop'], this.props)} />;
   }
 }
 
