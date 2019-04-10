@@ -5,8 +5,4 @@ export const screenType = {
 };
 
 export const pentairePatrolAuth = 'pentairePatrolAuth';
-
-export const loginAttempts = {
-  count: 'count',
-  skipUntil: 'skipUntil',
-};
+export const pentairePatrolToken = 'pentairePatrolToken';

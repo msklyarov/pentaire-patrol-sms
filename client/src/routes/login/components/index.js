@@ -1,6 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 class LoginComponent extends React.Component {
   state = {
@@ -19,14 +26,16 @@ class LoginComponent extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Form onSubmit={this.onLogon}>
         <TextField
+          required
           error
           label="Username"
           onChange={this.handleChange('username')}
           margin="normal"
         />
         <TextField
+          required
           error
           label="Password"
           type="password"
@@ -34,14 +43,15 @@ class LoginComponent extends React.Component {
           margin="normal"
         />
         <Button
+          disabled={this.props.disableButton}
           style={{ marginTop: '2em' }}
+          type="submit"
           variant="contained"
           color="secondary"
-          onClick={this.onLogon}
         >
           Submit
         </Button>
-      </React.Fragment>
+      </Form>
     );
   }
 }

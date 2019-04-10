@@ -16,10 +16,10 @@
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "nodemon": "1.11.0",
     "prettier": "^1.16.4",
-    "ringcentral": "https://github.com/msklyarov/ringcentral-js.git"
+    "ringcentral": "https://github.com/msklyarov/ringcentral-js.git",
+    "uuid": "^3.3.2"
   }
 }
