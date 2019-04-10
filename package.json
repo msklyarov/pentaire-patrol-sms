@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
-    "start-server": "node ./src/server.js",
-    "start": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "start": "node ./src/server.js",
     "server": "nodemon --inspect ./src/server.js",
-    "prettier": "prettier --write \"{src/**/*.{js,jsx,css},client/src/**/*.{js,jsx,css}}\"",
-    "update": "npm i && cd client && npm i"
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Maxim Sklyarov",
   "license": "MIT",
@@ -21,5 +20,8 @@
     "prettier": "^1.16.4",
     "ringcentral": "https://github.com/msklyarov/ringcentral-js.git",
     "uuid": "^3.3.2"
+  },
+  "engines": {
+    "node": "10.15.3"
   }
 }

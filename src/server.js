@@ -16,8 +16,9 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   if (
-    req.originalUrl === '/api/login' ||
-    req.originalUrl === '/api/getLoginStatus'
+    req.originalUrl !== '/api/sendSms' &&
+    req.originalUrl !== '/api/stopSms' &&
+    req.originalUrl !== '/api/getStatus'
   ) {
     return next();
   }
