@@ -11,9 +11,6 @@ import StatusComponent from './components/';
 
 class StatusContainer extends React.Component {
   componentDidMount() {
-    if (this.props.sms.taskId) {
-      this.props.fetchStatus(this.props.sms.taskId);
-    }
     this.setState({
       timerId: setInterval(() => {
         if (this.props.sms.taskId) {

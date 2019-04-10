@@ -63,7 +63,8 @@ module.exports = (
     })
     .then(() => {
       let aleatory = 0;
-      smsToArray.forEach((smsTo, i) => {
+      let row = 0;
+      smsToArray.forEach(smsTo => {
         aleatory += randomIntFromInterval(5500, 8500);
         sending(
           platform,
@@ -71,10 +72,14 @@ module.exports = (
           aleatory,
           smsFromArray,
           textArray,
-          i,
+          row,
           statusCallback,
           isStoppedCallback,
         );
+        row++;
+        if (row == smsFromArray.length) {
+          row = 0;
+        }
       });
     })
     .catch(e => {

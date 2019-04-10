@@ -15,7 +15,7 @@ export default ({ status, onStopSms, onStop }) => {
         error
         label="Status"
         multiline
-        rowsMax="4"
+        rowsMax="8"
         value={status.map((item, i) => `${i + 1}: ${item}`).join('\n')}
         margin="normal"
         InputProps={{
