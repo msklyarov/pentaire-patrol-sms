@@ -16,10 +16,10 @@ export default (username, password) => {
             pentairePatrolAuth,
             btoa(`${username}:${password}`),
           );
-        } else {
-          localStorage.removeItem(pentairePatrolAuth);
+          return { ...response.data, username };
         }
 
+        localStorage.removeItem(pentairePatrolAuth);
         return response.data;
       }),
   };

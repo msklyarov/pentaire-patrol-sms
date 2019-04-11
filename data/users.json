@@ -1,0 +1,12 @@
+[{
+  "name": "admin",
+  "password": "admin",
+  "smsLeft": 10
+},
+{
+  "name": "user",
+  "password": "user",
+  "smsLeft": 5
+}]
+
+

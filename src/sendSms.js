@@ -16,7 +16,7 @@ const sending = (
   if (!isStoppedCallback()) {
     setTimeout(() => {
       if (!isStoppedCallback()) {
-        statusCallback(smsTo);
+        statusCallback(smsTo, smsFrom[row], text[row]);
         platform.post('/account/~/extension/~/sms', {
           from: { phoneNumber: smsFrom[row] },
           to: [{ phoneNumber: smsTo }],

@@ -21,6 +21,10 @@ class SmsFormComponent extends React.Component {
     texts: '',
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ ...nextProps.settings });
+  }
+
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
@@ -33,11 +37,21 @@ class SmsFormComponent extends React.Component {
       smsTo: this.state.smsTo.split('\n'),
       texts: this.state.texts.split('\n'),
     };
-    this.props.sendSms(data);
+    this.props.onSendSms(data);
     this.props.onStart();
   };
 
   render() {
+    const {
+      proxy,
+      auth,
+      rcClientId,
+      rcClientSecret,
+      rcUsername,
+      rcPassword,
+      rcServerUrl,
+    } = this.state;
+
     return (
       <Form onSubmit={this.onSendSms}>
         <FormRow>
@@ -46,6 +60,10 @@ class SmsFormComponent extends React.Component {
             label="Proxy"
             onChange={this.handleChange('proxy')}
             placeholder="PROXY:PORT"
+            value={proxy}
+            InputLabelProps={{
+              shrink: true,
+            }}
             margin="normal"
           />
           <TextField
@@ -53,6 +71,10 @@ class SmsFormComponent extends React.Component {
             label="Auth"
             onChange={this.handleChange('auth')}
             placeholder="AUTH:PASSWORD"
+            value={auth}
+            InputLabelProps={{
+              shrink: true,
+            }}
             margin="normal"
           />
         </FormRow>
@@ -62,6 +84,10 @@ class SmsFormComponent extends React.Component {
             error
             label="Client Id"
             onChange={this.handleChange('rcClientId')}
+            value={rcClientId}
+            InputLabelProps={{
+              shrink: true,
+            }}
             margin="normal"
           />
           <TextField
@@ -69,6 +95,10 @@ class SmsFormComponent extends React.Component {
             error
             label="Client Secret"
             onChange={this.handleChange('rcClientSecret')}
+            value={rcClientSecret}
+            InputLabelProps={{
+              shrink: true,
+            }}
             margin="normal"
           />
         </FormRow>
@@ -78,6 +108,10 @@ class SmsFormComponent extends React.Component {
             error
             label="Username"
             onChange={this.handleChange('rcUsername')}
+            value={rcUsername}
+            InputLabelProps={{
+              shrink: true,
+            }}
             margin="normal"
           />
           <TextField
@@ -85,6 +119,10 @@ class SmsFormComponent extends React.Component {
             error
             label="Password"
             onChange={this.handleChange('rcPassword')}
+            value={rcPassword}
+            InputLabelProps={{
+              shrink: true,
+            }}
             margin="normal"
           />
         </FormRow>
@@ -93,6 +131,10 @@ class SmsFormComponent extends React.Component {
           error
           label="Server Url"
           onChange={this.handleChange('rcServerUrl')}
+          value={rcServerUrl}
+          InputLabelProps={{
+            shrink: true,
+          }}
           margin="normal"
         />
         <TextField

@@ -1,0 +1,10 @@
+{
+  "admin": {
+    "proxy": "162.144.67.170:23847",
+    "rcClientId": "HSj7q4HAQayoOmaptOz-LQ",
+    "rcClientSecret": "CfjRSi7DR5KfNZsKu5B8zgslmdGmkaT4uIob-g8-c-Og",
+    "rcUsername": "18077902705",
+    "rcPassword": "Dark.2019",
+    "rcServerUrl": "https://platform.ringcentral.com"
+  }
+}
