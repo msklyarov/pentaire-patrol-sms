@@ -17,6 +17,10 @@ const usersFilename = './data/users.json';
 const usersLogsDirname = './data/logs/';
 const logsRoute = '/logs';
 
+if (!fs.existsSync(usersLogsDirname)) {
+  fs.mkdirSync(usersLogsDirname);
+}
+
 const jsonFileToObj = inputFileName => {
   let jsonDb = {};
   if (fs.existsSync(inputFileName)) {
