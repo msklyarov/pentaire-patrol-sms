@@ -1,15 +1,15 @@
 {
   "name": "pentaire-patrol-sms",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "./server.js",
   "scripts": {
-    "start": "node ./src/server.js",
-    "server": "nodemon --inspect ./src/server.js",
-    "dev": "concurrently \"npm start\" \"cd client && npm start\"",
+    "start": "node ./server.js",
+    "server": "nodemon --inspect ./server.js",
+    "dev": "concurrently \"npm start\" \"cd client && npm start\" \"cd admin && npm start\"",
     "dev-mon": "concurrently \"npm run server\" \"cd client && npm start\"",
     "heroku-postbuild": "cd client && npm i && npm run build",
-    "prettier": "prettier --write \"{src/**/*.{js,jsx,css},client/src/**/*.{js,jsx,css}}\"",
-    "update": "npm i && cd client && npm i"
+    "prettier": "prettier --write \"{src/**/*.{js,jsx,css},client/src/**/*.{js,jsx,css},admin/src/**/*.{js,jsx,css}}\"",
+    "update": "npm i && cd client && npm i && cd ../admin && npm i"
   },
   "author": "Maxim Sklyarov",
   "license": "MIT",

@@ -1,4 +1,6 @@
 /node_modules
 /client/build
 /client/node_modules
+/admin/build
+/admin/node_modules
 /.idea
