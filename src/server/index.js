@@ -43,10 +43,11 @@ app.use(config.server.routeLogsPrefix, serveIndex(usersLogsDirname)); // shows y
 app.use(config.server.routeLogsPrefix, express.static(usersLogsDirname)); // serve the actual files
 
 //Static file declaration
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(config.server.routeAdminPrefix, express.static(path.join(__dirname, '../../admin/build')));
+app.use(express.static(path.join(__dirname, '../../client/build')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
 
 app.listen(config.server.port, () =>

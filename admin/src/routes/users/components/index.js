@@ -21,7 +21,7 @@ class UsersComponent extends React.Component {
   };
 
   render() {
-    const { users, deleteUser } = this.props;
+    const { users } = this.props;
 
     return (
       <form onSubmit={this.onAddUser}>

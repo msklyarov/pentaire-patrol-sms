@@ -5,11 +5,11 @@
   "scripts": {
     "start": "node ./server.js",
     "server": "nodemon --inspect ./server.js",
-    "dev": "concurrently \"npm start\" \"cd client && npm start\" \"cd admin && npm start\"",
+    "dev": "concurrently \"yarn start\" \"cd client && yarn start\" \"cd admin && yarn start\"",
     "dev-mon": "concurrently \"npm run server\" \"cd client && npm start\"",
-    "heroku-postbuild": "cd client && npm i && npm run build",
+    "heroku-postbuild": "cd client && yarn && yarn build && cd ../admin && yarn && yarn build",
     "prettier": "prettier --write \"{src/**/*.{js,jsx,css},client/src/**/*.{js,jsx,css},admin/src/**/*.{js,jsx,css}}\"",
-    "update": "npm i && cd client && npm i && cd ../admin && npm i"
+    "update": "yarn && cd client && yarn && cd ../admin && yarn"
   },
   "author": "Maxim Sklyarov",
   "license": "MIT",

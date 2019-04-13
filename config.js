@@ -3,6 +3,7 @@ module.exports = {
     port: process.env.PORT || 3001,
     routeApiPrefix: '/api',
     routeAuthPrefix: '/auth',
+    routeAdminPrefix: '/admin',
     routeAdminApiPrefix: '/admin-api',
     routeAdminAuthPrefix: '/admin-auth',
     routeLogsPrefix: '/logs',

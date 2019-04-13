@@ -15,6 +15,7 @@
     "styled-components": "^4.2.0"
   },
   "proxy": "http://localhost:3001",
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
