@@ -1,6 +1,6 @@
 import axios from 'axios';
 import ActionTypes from '../constants/actionTypes';
-// import { pentairePatrolAuth } from '../../../utils/constants';
+import { pentairePatrolAdminAuth } from '../../../utils/constants';
 
 export default () => ({
   type: ActionTypes.USERS_FETCH.name,
@@ -8,11 +8,13 @@ export default () => ({
     .post(
       '/admin-api/users',
       {},
-      // {
-      //   headers: {
-      //     Authorization: `Basic ${localStorage.getItem(pentairePatrolAuth)}`,
-      //   },
-      // },
+      {
+        headers: {
+          Authorization: `Basic ${localStorage.getItem(
+            pentairePatrolAdminAuth,
+          )}`,
+        },
+      },
     )
     .then(response => response.data),
 });

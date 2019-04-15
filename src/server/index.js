@@ -6,7 +6,10 @@ const auth = require('basic-auth');
 const fs = require('fs');
 const path = require('path');
 const config = require('../../config');
-const checkUserCredentials = require('../utils/checkUserCredentials');
+const {
+  checkUserCredentials,
+  checkAdminCredentials,
+} = require('../utils/checkCredentials');
 const { usersLogsDirname } = require('../utils/constants');
 
 if (!fs.existsSync(usersLogsDirname)) {
@@ -19,23 +22,32 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  if (
-    req.originalUrl !== '/api/sendSms' &&
-    req.originalUrl !== '/api/stopSms' &&
-    req.originalUrl !== '/api/getStatus'
-  ) {
-    return next();
-  }
   const user = auth(req);
 
-  if (!user || !checkUserCredentials(user.name, user.pass)) {
-    res.set('WWW-Authenticate', 'Basic realm="example"');
-    return res.status(401).send();
+  if (req.originalUrl.startsWith(config.server.routeApiPrefix)) {
+    if (!user || !checkUserCredentials(user.name, user.pass)) {
+      res.set('WWW-Authenticate', 'Basic realm="example"');
+      return res.status(401).send();
+    }
+  } else if (req.originalUrl.startsWith(config.server.routeAdminApiPrefix)) {
+    if (!user || !checkAdminCredentials(user.name, user.pass)) {
+      res.set('WWW-Authenticate', 'Basic realm="example"');
+      return res.status(401).send();
+    }
   }
+
   return next();
 });
 
-app.use(config.server.routeAuthPrefix, require('../rest/auth'));
+app.use(
+  config.server.routeAuthPrefix,
+  require('../rest/auth')(checkUserCredentials),
+);
+app.use(
+  config.server.routeAdminAuthPrefix,
+  require('../rest/auth')(checkAdminCredentials),
+);
+
 app.use(config.server.routeApiPrefix, require('../rest/api'));
 app.use(config.server.routeAdminApiPrefix, require('../rest/adminApi'));
 
@@ -43,7 +55,10 @@ app.use(config.server.routeLogsPrefix, serveIndex(usersLogsDirname)); // shows y
 app.use(config.server.routeLogsPrefix, express.static(usersLogsDirname)); // serve the actual files
 
 //Static file declaration
-app.use(config.server.routeAdminPrefix, express.static(path.join(__dirname, '../../admin/build')));
+app.use(
+  config.server.routeAdminPrefix,
+  express.static(path.join(__dirname, '../../admin/build')),
+);
 app.use(express.static(path.join(__dirname, '../../client/build')));
 
 app.get('*', (req, res) => {

@@ -8,7 +8,7 @@ export default () => {
   return {
     type: ActionTypes.FETCH_LOGIN_STATUS.name,
     payload: axios
-      .post('/auth/getLoginStatus', { sessionToken })
+      .post('/admin-auth/getLoginStatus', { sessionToken })
       .then(response => response.data),
   };
 };

@@ -1,2 +1,2 @@
-// export * from './user/reducers';
+export * from './admin/reducers';
 export * from './users/reducers';

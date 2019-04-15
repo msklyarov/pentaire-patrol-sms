@@ -2,8 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import logonAction from '../../modules/user/actions/logon';
-import fetchLoginStatusAction from '../../modules/user/actions/fetchStatus';
+import logonAction from '../../modules/admin/actions/logon';
+import fetchLoginStatusAction from '../../modules/admin/actions/fetchStatus';
 
 import LoginComponent from './components/';
 
@@ -11,18 +11,18 @@ class LoginContainer extends React.Component {
   state = { disableButton: false };
 
   checkStatus = () => {
-    if (this.props.user.skipTimeoutInMs > 0) {
+    if (this.props.admin.skipTimeoutInMs > 0) {
       this.setState({ disableButton: true });
       setTimeout(
         () => this.setState({ disableButton: false }),
-        this.props.user.skipTimeoutInMs,
+        this.props.admin.skipTimeoutInMs,
       );
     }
   };
 
   onLogon = (username, password) => {
     this.props.logon(username, password).then(() => {
-      if (this.props.user.loggedIn) {
+      if (this.props.admin.loggedIn) {
         this.props.onLogin();
       } else {
         this.checkStatus();
@@ -45,7 +45,7 @@ class LoginContainer extends React.Component {
 }
 
 const select = (state, props) => ({
-  user: state.user,
+  admin: state.admin,
 });
 
 const mapDispatchToProps = dispatch =>

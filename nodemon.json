@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "ignore": [
+    "data/*",
+    ".gitignore",
+    "nodemon.json"
+  ],
+  "ext": "js"
+}

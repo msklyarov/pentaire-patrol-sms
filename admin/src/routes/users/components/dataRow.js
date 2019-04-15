@@ -4,6 +4,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import { styles } from '../../../utils/constants';
+
 class DataRow extends React.Component {
   state = { editMode: false, file: null };
 
@@ -31,7 +33,7 @@ class DataRow extends React.Component {
 
     return (
       <TableRow>
-        <TableCell>
+        <TableCell style={styles.cell}>
           {!editMode ? (
             row.name
           ) : (
@@ -43,7 +45,7 @@ class DataRow extends React.Component {
             />
           )}
         </TableCell>
-        <TableCell>
+        <TableCell style={styles.cell}>
           {!editMode ? (
             row.password
           ) : (
@@ -55,7 +57,7 @@ class DataRow extends React.Component {
             />
           )}
         </TableCell>
-        <TableCell>
+        <TableCell style={styles.cell}>
           {!editMode ? (
             row.smsLeft
           ) : (
@@ -65,10 +67,11 @@ class DataRow extends React.Component {
               margin="normal"
               type="number"
               inputRef={input => (this.smsLeft = input)}
+              style={styles.inputSmsLeft}
             />
           )}
         </TableCell>
-        <TableCell>
+        <TableCell style={styles.cell}>
           {!editMode ? (
             <Button
               variant="contained"
@@ -87,7 +90,7 @@ class DataRow extends React.Component {
             </Button>
           )}
         </TableCell>
-        <TableCell>
+        <TableCell style={styles.cell}>
           {!editMode ? (
             <Button
               variant="contained"

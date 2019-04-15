@@ -29,14 +29,12 @@ class LoginComponent extends React.Component {
       <Form onSubmit={this.onLogon}>
         <TextField
           required
-          error
           label="Username"
           onChange={this.handleChange('username')}
           margin="normal"
         />
         <TextField
           required
-          error
           label="Password"
           type="password"
           onChange={this.handleChange('password')}
@@ -47,7 +45,7 @@ class LoginComponent extends React.Component {
           style={{ marginTop: '2em' }}
           type="submit"
           variant="contained"
-          color="secondary"
+          color="primary"
         >
           Submit
         </Button>

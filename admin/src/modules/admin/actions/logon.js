@@ -1,6 +1,6 @@
 import axios from 'axios';
 import ActionTypes from '../constants/actionTypes';
-import { pentairePatrolAuth } from '../../../utils/constants';
+import { pentairePatrolAdminAuth } from '../../../utils/constants';
 import getSessionToken from '../../../utils/getSessionToken';
 
 export default (username, password) => {
@@ -9,17 +9,17 @@ export default (username, password) => {
   return {
     type: ActionTypes.LOGON.name,
     payload: axios
-      .post('/auth/login', { username, password, sessionToken })
+      .post('/admin-auth/login', { username, password, sessionToken })
       .then(response => {
         if (response.data.loggedIn) {
           localStorage.setItem(
-            pentairePatrolAuth,
+            pentairePatrolAdminAuth,
             btoa(`${username}:${password}`),
           );
           return { ...response.data, username };
         }
 
-        localStorage.removeItem(pentairePatrolAuth);
+        localStorage.removeItem(pentairePatrolAdminAuth);
         return response.data;
       }),
   };
